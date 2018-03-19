@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.223,=D:\DX\Курсач 2.0\Unit5.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.384,=D:\DX\Курсач 2.0\Unit4.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.147,=C:\Users\MAIN\Desktop\Курсач 2.0\Unit3.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.771,D:\DX\Курсач 2.0\Unit2.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.871,=C:\Users\MAIN\Documents\Embarcadero\Studio\Projects\Unit42.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.876,D:\DX\Курсач 2.0\Unit5.pas=D:\DX\Курсач 2.0\BubbleSortUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.095,C:\Users\MAIN\Desktop\Курсач 2.0\Unit42.dfm=C:\Users\MAIN\Documents\Embarcadero\Studio\Projects\Unit42.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.349,=C:\Users\MAIN\Desktop\Курсач 2.0\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.490,=C:\Users\MAIN\Desktop\Курсач 2.0\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.523,C:\Users\MAIN\Desktop\Курсач 2.0\Project13.dproj=C:\Users\MAIN\Documents\Embarcadero\Studio\Projects\Project13.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.547,=C:\Users\MAIN\Desktop\Курсач 2.0\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.095,C:\Users\MAIN\Desktop\Курсач 2.0\Unit42.pas=C:\Users\MAIN\Documents\Embarcadero\Studio\Projects\Unit42.pas</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Unit1.pas"/>
+    <File Path="Unit1.dfm"/>
+    <File Path="Unit3.pas"/>
+    <File Path="Unit3.dfm"/>
+    <File Path="Unit42.pas"/>
+    <File Path="Unit42.dfm"/>
+    <File Path="Unit4.pas"/>
+    <File Path="Unit4.dfm"/>
+    <File Path="BubbleSortUnit.pas"/>
+  </ProjectSortOrder>
+</BorlandProject>

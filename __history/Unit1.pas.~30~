@@ -1,0 +1,143 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, unit42;
+
+type
+  TForm1 = class(TForm)
+    LabeledEdit1: TLabeledEdit;
+    LabeledEdit2: TLabeledEdit;
+    LabeledEdit3: TLabeledEdit;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    ColorDialog1: TColorDialog;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Label1: TLabel;
+    Shape1: TShape;
+    Timer1: TTimer;
+    Panel1: TPanel;
+    procedure Button1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure LabeledEdit1Change(Sender: TObject);
+    procedure LabeledEdit2Change(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
+    procedure LabeledEdit3Change(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure CheckBox2Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  l,l2:integer;
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+if ColorDialog1.Execute then
+CurColor := ColorDialog1.Color;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+if ColorDialog1.Execute then
+NegColor := ColorDialog1.Color;
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+if ColorDialog1.Execute then
+PosColor := ColorDialog1.Color;
+end;
+
+procedure TForm1.CheckBox1Click(Sender: TObject);
+begin
+inc(l2);
+if l2 mod 2 <> 0 then
+IsDivByTen := true
+else
+IsDivByTen := false;
+end;
+
+procedure TForm1.CheckBox2Click(Sender: TObject);
+begin
+inc(l);
+if l mod 2 <> 0 then
+IsDontEqual := true
+else
+IsDontEqual := false;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+LabeledEdit1.Text := '50';
+LabeledEdit3.Text := '10';
+LabeledEdit2.Text := '100';
+end;
+
+procedure TForm1.LabeledEdit1Change(Sender: TObject);
+begin
+  if LabeledEdit1.Text <> '' then
+  begin
+    if StrToInt(LabeledEdit1.Text) > 0 then
+    ArraySize := StrToInt(LabeledEdit1.Text)
+    else
+    begin
+    LabeledEdit1.Text := '1';
+    ArraySize := 1;
+    end;
+  end;
+end;
+
+procedure TForm1.LabeledEdit2Change(Sender: TObject);
+begin
+  if LabeledEdit2.Text <> '' then
+  begin
+    if StrToInt(LabeledEdit2.Text) > 0 then
+    SizeY := StrToInt(LabeledEdit2.Text)
+    else
+    begin
+    LabeledEdit2.Text := '1';
+    SizeY := 1;
+    end;
+  end;
+end;
+
+procedure TForm1.LabeledEdit3Change(Sender: TObject);
+begin
+  if LabeledEdit3.Text <> '' then
+  begin
+    if StrToInt(LabeledEdit3.Text) > 0 then
+     SizeX := StrToInt(LabeledEdit3.Text)
+    else
+    begin
+    LabeledEdit3.Text := '1';
+    SizeY := 1;
+    end;
+  end;
+end;
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+begin
+Shape1.Width := SizeX;
+if IsDivByTen = false then
+Shape1.Height := SizeY
+else
+Shape1.Height := (SizeY div 10) * 10;
+Shape1.Brush.Color := NegColor;
+Shape1.Left := (Panel1.Width /2) - (Shape1.Width/2)
+end;
+
+end.

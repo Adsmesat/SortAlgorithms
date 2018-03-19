@@ -1,0 +1,245 @@
+unit Unit42;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, BubbleSortUnit, Vcl.Forms, Vcl.StdCtrls, Unit2, Unit3, Vcl.Menus, Vcl.Dialogs, Vcl.ExtCtrls,
+  Vcl.Imaging.jpeg;
+
+type
+    UUUU = Array of TShape;
+    TForm42 = class(TForm)
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    N6: TMenuItem;
+    N9: TMenuItem;
+    N10: TMenuItem;
+    N7: TMenuItem;
+    CheckBox1: TCheckBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Timer1: TTimer;
+    Timer2: TTimer;
+    procedure N5Click(Sender: TObject);
+    procedure N10Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure N4Click(Sender: TObject);
+    procedure N3Click(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure N6Click(Sender: TObject);
+
+    procedure Timer2Timer(Sender: TObject);
+
+
+  end;
+
+var
+  Form42: TForm42;
+
+  //Обьекты
+  El:TShape;
+  A:UUUU;
+  //Обьекты
+
+  //Переменные
+  Offset,FormOffset,SizeX,SizeY:integer;
+  i,j,k,f,p,full:integer;
+
+    IsDivByTen:boolean;
+    IsDontEqual:boolean;
+
+      ArraySize:integer;
+      SortTime:real;
+      SortSpeed:integer;      //Скорость сортировки которая идет в sleep();
+      IsLess:boolean;         //Соритирование от большего к меньшему
+      IsShowValues:boolean;   //Обновлять количество сравнений и перестановок
+      IsInfinitySort:boolean; //Бесконечная сортировка от меньшего и к большему
+      IsSlowAlg:boolean;      //Медленный алгоритм
+      IsMediumAlg:boolean;
+      IsFastAlg:boolean;
+
+        NegColor,PosColor,CurColor:TColor;
+  //Переменные
+
+  //Потоки сортировок
+  Bubble:BubbleSort;
+
+  //Потоки сортировок
+implementation
+
+{$R *.dfm}
+
+uses unit1,unit4;
+
+function SizeR(MaxValue:integer):integer;
+begin
+      randomize;
+      if IsDivByTen then
+       Result := ((-random(MaxValue)-10) div 10) * 10
+      else
+       Result := -random(MaxValue)-10;
+end;
+
+
+
+procedure TForm42.CheckBox1Click(Sender: TObject);
+begin
+inc(full);
+
+if full mod 2 <> 0 then
+begin
+Form42.BorderStyle := bsNone;
+Form42.WindowState := WsMaximized;
+FormOffset := 10;
+end
+else
+begin
+FormOffset := 45;
+Form42.BorderStyle := bsSingle;
+Form42.WindowState := WsNormal;
+end;
+end;
+
+procedure TForm42.FormCreate(Sender: TObject);
+begin
+Timer2.Enabled := false;
+IsLess := false;
+NegColor := clRed;
+PosColor := clLime;
+CurColor := clYellow;
+FormOffset := 58;
+Form42.DoubleBuffered := true;
+SizeX := 1;
+SizeY := 700;
+ArraySize := 1000;
+end;
+
+
+
+procedure TForm42.N10Click(Sender: TObject);
+begin
+if (not Assigned(unit1.Form1)) then
+Form1 := TForm1.Create(Self);
+Form1.Show;
+end;
+
+
+procedure TForm42.N2Click(Sender: TObject);
+begin
+if (not Assigned(unit4.Form4)) then
+Form4 := TForm4.Create(Self);
+Form4.Show;
+end;
+
+procedure TForm42.N3Click(Sender: TObject);
+begin
+if (not Assigned(unit3.Form3)) then
+Form3 := TForm3.Create(Self);
+Form3.Show;
+end;
+
+procedure TForm42.N4Click(Sender: TObject);
+begin
+  Bubble := BubbleSort.Create(true);
+  Bubble.Priority := tpIdle;
+  Bubble.FreeOnTerminate := true;
+  Bubble.Resume;
+
+  Timer2.Enabled := true;
+
+end;
+
+procedure TForm42.N5Click(Sender: TObject);
+var i,j:integer;
+begin
+
+    p:=-1;
+
+    for I := 0 to Length(A)-1 do
+    begin
+      if A[i] <> nil then
+        A[i].Free;
+    end;
+
+    SetLength(A,ArraySize);
+
+
+
+    for I := 0 to ArraySize-1 do
+    begin
+      K := SizeR(SizeY);
+
+      El := TShape.Create(Self);
+      El.SetParentComponent(Self);
+
+      El.Brush.Color := NegColor;
+
+      El.Top   := Form42.Height-FormOffset;
+      El.Left  := i*SizeX;
+
+      El.Width := SizeX;
+
+      if IsDontEqual = false then
+      begin
+      El.Height := K;
+      end
+      else if IsDontEqual = true then
+      begin
+        El.Height := p;
+        dec(p,2);
+      end;
+
+
+      A[i] := El;
+
+    end;
+
+
+    if IsDontEqual then
+    begin
+        for I := 0 to Length(A)-1 do
+          begin
+            randomize;
+            f := random(Length(A));
+            P := A[i].Height;
+            A[i].Height := A[f].Height;
+            A[f].Height := P;
+          end;
+    end;
+
+    Form42.Repaint;
+
+end;
+
+
+
+
+procedure TForm42.N6Click(Sender: TObject);
+begin
+randomize;
+for I := 0 to ArraySize-1 do
+  begin
+   K := SizeR(SizeY);
+   A[i].Height := K;
+  end;
+  Form42.Repaint;
+end;
+
+procedure TForm42.Timer2Timer(Sender: TObject);
+var tmp:String;
+begin
+if Bubble.Terminate = false then
+
+    SortTime := SortTime+15;
+    label3.Caption := FloatToStr(SortTime);
+
+end;
+
+end.
